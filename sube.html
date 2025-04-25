@@ -325,7 +325,7 @@ button.temizle:hover {
   <h5>Deri imha etme</h5>
   <input type="text" id="fiyat" placeholder="Gelen Derili Bonfile Fiyatı Giriniz" />
   <button onclick="maliyetHesapla()">Hesapla</button>
-  <button class="temizle" onclick="inputlariTemizle(this)">Temizle</button>
+  <button  class="temizle" onclick="inputlariTemizle(this)">Temizle</button>
 
   <div class="result" id="sonuc1"></div>
   
@@ -406,7 +406,7 @@ button.temizle:hover {
     
 
 
-  <button class="temizle" onclick="inputlariTemizle(this)">Temizle</button>
+  <button id="temizle" class="temizle" onclick="inputlariTemizle(this)">Temizle</button>
   <div class="result" id="sonucPara"></div>
   <a href="#" id="excelIndir"  style="display:none;">
     <i class="fas fa-file-excel"></i> Excel İndir
@@ -420,6 +420,22 @@ button.temizle:hover {
 
 
   <script>
+  // Input alanlarının her birine 'Enter' tuşuyla geçiş yapmak için event listener ekleyelim
+document.querySelectorAll('input[type="number"]').forEach((input, index, inputs) => {
+    input.addEventListener('keydown', function(event) {
+        if (event.key === 'Enter') {
+            // Eğer Enter tuşuna basıldıysa, bir sonraki input'a odaklan
+            if (index + 1 < inputs.length) {
+                inputs[index + 1].focus();
+            }
+        }
+    });
+});
+  
+  
+ document.getElementById('temizle').addEventListener('click', function() {
+    document.getElementById('excelIndir').style.display = 'none';
+});
   
 function paraHesapla() {
   const adet200 = parseInt(document.getElementById('para200').value) || 0;
@@ -543,6 +559,7 @@ function indirExcel(tarih) {
 
   XLSX.writeFile(wb, dosyaAdi, { cellStyles: true });
 }
+
 
 
     // Kartlara tıklama ile secili sınıfı ekleme
