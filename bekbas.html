@@ -257,12 +257,12 @@ button.temizle:hover {
   <div class="info-icon" onclick="aciklamaGoster(this)">ℹ️</div>
   <div class="aciklama-overlay">
     <div class="aciklama-icerik">
-<<<<<<< HEAD
-     <p>Bu kart, verilen tane gramajı, koli adedi ve toplam kilogram üzerinden, toplam adet sayısını hesaplar. Ayrıca, bir adet için belirlenen kilogram fiyatı üzerinden, KDV hariç ve KDV dahil adet fiyatlarını hesaplar. Bu bilgilerle toplam maliyet hesaplamaları yapılabilir.Örnegin: 450 gr sucuk*8 urununden 400 kg ve birim fiyati olarak 600 tl olarak fatura edilmistir. Bu bilgiler dogrultusunda Bir adet 450 gr urunun birim fiyati bulunur. </p>
 
-=======
-     <p>Bu kart, verilen tane gramajı, koli adedi ve toplam kilogram üzerinden, toplam adet sayısını hesaplar. Ayrıca, bir adet için belirlenen kilogram fiyatı üzerinden, KDV hariç ve KDV dahil adet fiyatlarını hesaplar. Bu bilgilerle toplam maliyet hesaplamaları yapılabilir.</p>
->>>>>>> e25b379 (addcart)
+     <p>Bu kart, verilen tane gramajı, koli adedi ve toplam kilogram üzerinden, toplam adet sayısını hesaplar. Ayrıca, bir adet için belirlenen kilogram fiyatı üzerinden,
+	 KDV hariç ve KDV dahil adet fiyatlarını hesaplar. Bu bilgilerle toplam maliyet hesaplamaları yapılabilir.Örnegin: 450 gr sucuk*8 urununden 400 kg ve birim fiyati olarak 
+	 600 tl olarak fatura edilmistir. Bu bilgiler dogrultusunda Bir adet 450 gr urunun birim fiyati bulunur. </p>
+
+
       <button onclick="aciklamaKapat(this)">Kapat</button>
     </div>
   </div>
@@ -280,9 +280,27 @@ button.temizle:hover {
 
   
 
+<!-- Card 3: Cari Kod Karşılaştırma -->
+<div class="card">
+  <div class="info-icon" onclick="aciklamaGoster(this)">ℹ️</div>
+  <div class="aciklama-overlay">
+    <div class="aciklama-icerik">
+      <p>Bu kart, sistemde kayıtlı cari kodlarla girilen kodları karşılaştırır ve farklı olanları bulur.</p>
+      
+      <button onclick="aciklamaKapat(this)">Kapat</button>
+    </div>
+  </div>
+  
 
+<h2><STRONG><a href="BEKBAS_CARD3/CARD3.html" target="_blank" style="padding-top: 180px; display: block;">Cari Kod Karşılaştırma</a></STRONG></h2>
+ 
+
+
+</div>
 
   <script>
+
+
   
   function ortalamaFiyatHesapla() {
   const depoKg = parseFloat(document.getElementById('depoMiktar').value);
