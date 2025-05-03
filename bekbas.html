@@ -4,6 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Bekbaş Hesaplamalar</title>
+  <link rel="icon" type="image/png" href="icon1.jpg" />
+
 
   <style>
   .info-icon {
@@ -228,46 +230,52 @@ button.temizle:hover {
 
   <div class="baslik">🐔 BEKBAŞ MERKEZ</div>
 
-
-
-
+<!-- Card 1: ortalama fiyat bulma -->
 <div class="card">
   <div class="info-icon" onclick="aciklamaGoster(this)">ℹ️</div>
   <div class="aciklama-overlay">
     <div class="aciklama-icerik">
-     <p>Bu kart, verilen tane gramajı, koli adedi ve toplam kilogram üzerinden, toplam adet sayısını hesaplar. Ayrıca, bir adet için belirlenen kilogram fiyatı üzerinden, KDV hariç ve KDV dahil adet fiyatlarını hesaplar. Bu bilgilerle toplam maliyet hesaplamaları yapılabilir.Örnegin: 450 gr sucuk*8 urununden 400 kg ve birim fiyati olarak 600 tl olarak fatura edilmistir. Bu bilgiler dogrultusunda Bir adet 450 gr urunun birim fiyati bulunur. </p>
-
+      <p>Bu kart, mevcut depodaki ürün ve yeni gelen ürün miktarları ile fiyatlarına göre, ortalama birim fiyatı hesaplar. Maliyet takibi için kullanılır.</p>
       <button onclick="aciklamaKapat(this)">Kapat</button>
     </div>
   </div>
-  
-  
-<!-- Card 3: Adet Hesaplama -->
+  <h2><strong>ÇALIŞ:</strong>1</h2>
+  <h2><u>Ortalama Fiyat Hesaplama</u></h2>
+  <input type="number" id="depoMiktar" placeholder="Depodaki Miktar" />
+  <input type="number" id="depoFiyat" step="0.0001" placeholder="Depodaki Fiyat (TL)" />
+  <input type="number" id="gelenMiktar" placeholder="Gelen Miktar" />
+  <input type="number" id="gelenFiyat" step="0.0001" placeholder="Gelen Fiyat (TL)" />
+  <button onclick="ortalamaFiyatHesapla()">Hesapla</button>
+  <button class="temizle" onclick="inputlariTemizle(this)">Temizle</button>
+  <div class="result" id="ortalamaSonuc"></div>
+</div>
 
-<h2><STRONG>ÇALIŞ:</STRONG>3</h2>
+
+
+<!-- Card 2: Adet Hesaplama -->
+<div class="card">
+  <div class="info-icon" onclick="aciklamaGoster(this)">ℹ️</div>
+  <div class="aciklama-overlay">
+    <div class="aciklama-icerik">
+<<<<<<< HEAD
+     <p>Bu kart, verilen tane gramajı, koli adedi ve toplam kilogram üzerinden, toplam adet sayısını hesaplar. Ayrıca, bir adet için belirlenen kilogram fiyatı üzerinden, KDV hariç ve KDV dahil adet fiyatlarını hesaplar. Bu bilgilerle toplam maliyet hesaplamaları yapılabilir.Örnegin: 450 gr sucuk*8 urununden 400 kg ve birim fiyati olarak 600 tl olarak fatura edilmistir. Bu bilgiler dogrultusunda Bir adet 450 gr urunun birim fiyati bulunur. </p>
+
+=======
+     <p>Bu kart, verilen tane gramajı, koli adedi ve toplam kilogram üzerinden, toplam adet sayısını hesaplar. Ayrıca, bir adet için belirlenen kilogram fiyatı üzerinden, KDV hariç ve KDV dahil adet fiyatlarını hesaplar. Bu bilgilerle toplam maliyet hesaplamaları yapılabilir.</p>
+>>>>>>> e25b379 (addcart)
+      <button onclick="aciklamaKapat(this)">Kapat</button>
+    </div>
+  </div>
+<h2><STRONG>ÇALIŞ:</STRONG>2</h2>
 <h2><u>Adet Hesaplama</u></h2>
-
-
   <input type="number" id="taneGram" placeholder="Tane Gramajı (gr): örn:500"/>
-
-
   <input type="number" id="koliAdedi" placeholder="Kolideki Adet Sayısı: örn:8" style="display:none;" value="1" />
-
- 
   <input type="number" id="toplamKg" placeholder="Toplam Miktar (kg): örn: 400" />
-
-
   <input type="number" id="birimFiyat" step="0.0001" placeholder="KDV Hariç Birim Fiyat:örn:74.25" />
-
- 
   <input type="number" id="kdvOrani" value="1"  />
-
   <button onclick="sosisDogruHesapla()">Hesapla</button>
   <button class="temizle" onclick="inputlariTemizle(this)">Temizle</button>
-  <div class="result" id="sonuc3"></div>
-
-  
-  
+  <div class="result" id="sonuc3"></div> 
 </div>
 
   
@@ -275,6 +283,26 @@ button.temizle:hover {
 
 
   <script>
+  
+  function ortalamaFiyatHesapla() {
+  const depoKg = parseFloat(document.getElementById('depoMiktar').value);
+  const depoFiyat = parseFloat(document.getElementById('depoFiyat').value);
+  const gelenKg = parseFloat(document.getElementById('gelenMiktar').value);
+  const gelenFiyat = parseFloat(document.getElementById('gelenFiyat').value);
+
+  if (isNaN(depoKg) || isNaN(depoFiyat) || isNaN(gelenKg) || isNaN(gelenFiyat)) {
+    document.getElementById('ortalamaSonuc').innerText = "Lütfen tüm alanları doldurun.";
+    return;
+  }
+
+  const toplamMiktar = depoKg + gelenKg;
+  const toplamTutar = (depoKg * depoFiyat) + (gelenKg * gelenFiyat);
+  const ortalamaFiyat = (toplamTutar / toplamMiktar).toFixed(2);
+
+  document.getElementById('ortalamaSonuc').innerText =
+    `Ortalama Fiyat: ${ortalamaFiyat} TL/kg`;
+}
+
     // Kartlara tıklama ile secili sınıfı ekleme
   document.querySelectorAll('.card').forEach(card => {
     card.addEventListener('click', function () {
