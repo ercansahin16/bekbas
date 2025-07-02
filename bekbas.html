@@ -289,9 +289,40 @@ button.temizle:hover {
   <div class="result" id="sonuc3"></div> 
 </div>
 
+
+<!-- Card 4: Patates KG Hesaplama -->
+<div class="card">
+  <div class="info-icon" onclick="aciklamaGoster(this)">ℹ️</div>
+  <div class="aciklama-overlay">
+    <div class="aciklama-icerik">
+      <p>
+        Bu kart, toplam adet, adet gramajı ve birim fiyat bilgilerinden toplam gelen kilogramı ve kilogram başına fiyatı hesaplar. KDV dahil ve hariç fiyatlar sunulur.
+        Örneğin: 2500 gr'lık 20.000 adet patates 142,9 TL birim fiyat ve %1 KDV oranı ile faturalanmışsa, toplam kilogram ve kilogram fiyatı hesaplanır.
+      </p>
+      <button onclick="aciklamaKapat(this)">Kapat</button>
+    </div>
+  </div>
+
+  <h2><strong>ÇALIŞ: 4</strong></h2>
+  <h2><u>KG Hesaplama (Patates)</u></h2>
+
+  <input type="number" id="patatesAdet" placeholder="Toplam Adet: örn:20000" />
+  <input type="number" id="patatesGramaj" placeholder="Adet Gramajı (gr): örn:2500" />
+  <input type="number" id="patatesBirimFiyat" placeholder="Birim Fiyat (KDV Hariç): örn:142.9" step="0.0001" />
+  <input type="number" id="patatesKdvOrani" value="1" placeholder="KDV Oranı (%)" />
+
+  <button onclick="patatesKgHesapla()">Hesapla</button>
+  <button class="temizle" onclick="inputlariTemizle(this)">Temizle</button>
+
+  <div class="result" id="sonuc4"></div>
+</div>
+
+
+
+	
   
 
-<!-- Card 3: Cari Kod Karşılaştırma -->
+<!-- Card 4: Cari Kod Karşılaştırma -->
 <div class="card">
   <div class="info-icon" onclick="aciklamaGoster(this)">ℹ️</div>
   <div class="aciklama-overlay">
@@ -302,12 +333,9 @@ button.temizle:hover {
       <button onclick="aciklamaKapat(this)">Kapat</button>
     </div>
   </div>
-  
+  <h2><STRONG>ÇALIŞ:</STRONG>4</h2>
 
 <h2><STRONG><a href="BEKBAS_CARD3/CARD3.html"  style="padding-top: 180px; display: block;">2 FARKLI EXCELİ KARŞILAŞTIR</a></STRONG></h2>
- 
-
-
 </div>
 
   <script>
@@ -380,7 +408,34 @@ function aciklamaKapat(btn) {
 }
 
   
-  
+
+
+
+	  function patatesKgHesapla() {
+  const adet = parseInt(document.getElementById('patatesAdet').value);
+  const gramaj = parseFloat(document.getElementById('patatesGramaj').value);
+  const birimFiyat = parseFloat(document.getElementById('patatesBirimFiyat').value);
+  const kdv = parseFloat(document.getElementById('patatesKdvOrani').value);
+
+  if (isNaN(adet) || isNaN(gramaj) || isNaN(birimFiyat) || isNaN(kdv)) {
+    document.getElementById('sonuc4').innerText = "Lütfen tüm alanları doldurun.";
+    return;
+  }
+
+  const toplamKg = (adet * gramaj) / 1000;
+  const kgFiyatKDVsiz = (birimFiyat / (gramaj / 1000)).toFixed(2);
+  const kgFiyatKDVli = (kgFiyatKDVsiz * (1 + kdv / 100)).toFixed(2);
+
+  document.getElementById('sonuc4').innerText =
+    `Toplam Miktar: ${toplamKg.toLocaleString()} kg\n` +
+    `KG Fiyatı (KDV Hariç): ${kgFiyatKDVsiz} TL\n` +
+    `KG Fiyatı (KDV Dahil): ${kgFiyatKDVli} TL`;
+}
+
+
+
+
+	  
   
  function sosisDogruHesapla() {
   const gram = parseFloat(document.getElementById('taneGram').value);
